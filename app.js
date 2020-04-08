@@ -146,6 +146,6 @@ app.post('/incoming', asyncHandler(async(req,res) =>{
 }));
 
 
-http.createServer(app).listen(3000, () => {
-    console.log('Express server listening on port 3000');
+http.createServer(app).listen(80, () => {
+    console.log('Express server listening on port 80');
 });
