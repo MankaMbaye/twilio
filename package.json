@@ -1,0 +1,28 @@
+{
+  "name": "test-node",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "main": "node build --prod"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@chilkat/ck-node10-linux64": "^9.50.82",
+    "@chilkat/ck-node11-linux64": "^9.50.82",
+    "@chilkat/ck-node11-win64": "^9.50.82",
+    "@chilkat/ck-node12-win64": "^9.50.82",
+    "@chilkat/ck-node8-linux64": "^9.50.82",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "express-async-handler": "^1.1.4",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.5",
+    "twilio": "^3.42.0"
+  },
+  "devDependencies": {},
+  "keywords": [],
+  "description": ""
+}
