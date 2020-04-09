@@ -45,7 +45,7 @@ if (os.platform() == 'win32') {
     var chilkat = require('@chilkat/ck-node11-macosx');
 }
 
-
+// http://164.68.108.161:8080/incoming
 
 app.post('/incoming', asyncHandler(async(req,res) =>{
   
@@ -57,7 +57,7 @@ app.post('/incoming', asyncHandler(async(req,res) =>{
         const twiml = new MessagingResponse();
 
             //const API_ENDPOINT = 'https://ibusinesscompanies.com:8443/mobile-ws';
-            var base = 'http://ibusinesscompanies.com:18080/mobile-ws/product/whatsap/produit?type=UNE';
+            var base = 'http://ibusinesscompanies.com:18080/mobile-ws/product/whatsap/produit?type=A LA UNE';
             var query = req.body.Body;
             
             
@@ -100,7 +100,7 @@ app.post('/incoming', asyncHandler(async(req,res) =>{
         const twiml = new MessagingResponse();
 
             //const API_ENDPOINT = 'https://ibusinesscompanies.com:8443/mobile-ws';
-            var base = 'http://ibusinesscompanies.com:18080/mobile-ws/product/whatsap/produit?type=UNE';
+            var base = 'http://ibusinesscompanies.com:18080/mobile-ws/product/whatsap/produit?type=A LA UNE';
             var query = req.body.Body;
             
             
