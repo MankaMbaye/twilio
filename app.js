@@ -47,105 +47,160 @@ if (os.platform() == 'win32') {
 
 // http://164.68.108.161:8080/incoming
 
-app.post('/incoming', asyncHandler(async(req,res) =>{
-  
-   try{
+app.post('/incoming', asyncHandler(async(req,res,next) =>{
 
-    console.log(req.body);
-  
-    if(req.body.Body!=1){
-        const twiml = new MessagingResponse();
-
-            //const API_ENDPOINT = 'https://ibusinesscompanies.com:8443/mobile-ws';
-            var base = 'http://ibusinesscompanies.com:18080/mobile-ws/product/whatsap/produit?type=A LA UNE';
-            var query = req.body.Body;
-            
-            
-            request(base, async function (error, response, body) {
-                body = await JSON.parse(JSON.stringify(body));
-                // console.log(body);
-                var jsonArray = await new chilkat.JsonArray();
-                jsonArray.Load(body);
-                var jsonObject = await new chilkat.JsonObject();
-                jsonObject.Load(body); 
-                i = 0;
-                j = 0;
-                var numPets = await jsonObject.SizeOfArray("product_list");
-                var numPetAs = await jsonObject.SizeOfArray("product_list.media");
-                console.log(numPets);
-                while (i < numPets) {
-                    jsonObject.I = await i;
-                    jsonObject.I = await j;
-                    console.log(i + ": " + jsonObject.StringOf("product_list[i].name")); 
-                    var msg =  twiml.message(jsonObject.StringOf("product_list[i].name")+"\n")
-                    msg.media(jsonObject.StringOf("product_list[i].media[j].url"));
-                    i = i+1;
-                    j = j+1;
-                }
-                var msge =  twiml.message(jsonObject.StringOf("product_list[3].name")+"\n")
-                msge.media(jsonObject.StringOf("product_list[3].media[3].url"));
-                if(j=6){
-                twiml.message("Vous pouvez nous contacter au .\n 338273737 ou nous retrouver \n https://www.google.com/maps/place/Innov4africa/@14.7218749,-17.4634412,2728m/data=!3m1!1e3!4m5!3m4!1s0xec1730591a88de7:0x9a4d6bfb2eb7a58c!8m2!3d14.7166336!4d-17.4696404%22")
-                twiml.message("Merci de nous contacter sur whatsapp au 777672020 pour plus d'infos"); 
-                }
-                //https://server.ibusinesscompanies.com/i-images/Set_de_Th%C3%A9_8_Pi%C3%A8ces_/_1_Carafe_+_1_Plat_+_6_Tasses_/_Porcelaine_Blanc14242_800014241585847650502.jpg
-                res.writeHead(200, {'Content-Type': 'text/xml'});
-                res.end(twiml.toString());
-            });
-               
-                    
-            }
-
-    else{
-        const twiml = new MessagingResponse();
-
-            //const API_ENDPOINT = 'https://ibusinesscompanies.com:8443/mobile-ws';
-            var base = 'http://ibusinesscompanies.com:18080/mobile-ws/product/whatsap/produit?type=A LA UNE';
-            var query = req.body.Body;
-            
-            
-            request(base, async function (error, response, body) {
-                body = await JSON.parse(JSON.stringify(body));
-                // console.log(body);
-                var jsonArray = await new chilkat.JsonArray();
-                jsonArray.Load(body);
-                var jsonObject = await new chilkat.JsonObject();
-                jsonObject.Load(body); 
-                i = 0;
-                j = 0;
-                var numPets = await jsonObject.SizeOfArray("product_list");
-                var numPetAs = await jsonObject.SizeOfArray("product_list.media");
-                console.log(numPets);
-                while (i < numPets) {
-                    jsonObject.I = await i;
-                    jsonObject.I = await j;
-                    console.log(i + ": " + jsonObject.StringOf("product_list[i].name")); 
-                    var msg =  twiml.message(jsonObject.StringOf("product_list[i].name")+"\n")
-                    msg.media(jsonObject.StringOf("product_list[i].media[j].url"));
-                    i = i+1;
-                    j = j+1;
-                }
-                var msge =  twiml.message(jsonObject.StringOf("product_list[3].name")+"\n")
-                msge.media(jsonObject.StringOf("product_list[3].media[3].url"));
-                if(j=6){
-                twiml.message("Vous pouvez nous contacter au .\n 338273737 ou nous retrouver \n https://www.google.com/maps/place/Innov4africa/@14.7218749,-17.4634412,2728m/data=!3m1!1e3!4m5!3m4!1s0xec1730591a88de7:0x9a4d6bfb2eb7a58c!8m2!3d14.7166336!4d-17.4696404%22")
-                twiml.message("Merci de nous contacter sur whatsapp au 777672020 pour plus d'infos"); 
-                }
-                //https://server.ibusinesscompanies.com/i-images/Set_de_Th%C3%A9_8_Pi%C3%A8ces_/_1_Carafe_+_1_Plat_+_6_Tasses_/_Porcelaine_Blanc14242_800014241585847650502.jpg
-                res.writeHead(200, {'Content-Type': 'text/xml'});
-                res.end(twiml.toString());
-            });
-               
-                    
-            
+    async function premier(){
+     await new Promise(resolve => {
+         const resp = new MessagingResponse();
+          resp.message("Vous pouvez nous contacter au .\n 338273737 ou nous retrouver \n https://www.google.com/maps/place/Innov4africa/@14.7218749,-17.4634412,2728m/data=!3m1!1e3!4m5!3m4!1s0xec1730591a88de7:0x9a4d6bfb2eb7a58c!8m2!3d14.7166336!4d-17.4696404%22")
+          resp.message("Merci de nous contacter sur whatsapp au https://wa.me/221777672020 pour plus d'infos"); 
+          
+     });
     }
-} catch (error) {
-    console.log(error);
-  }
+   
+    try{
+     if(req.body.Body!=1){
+         const twiml = new MessagingResponse();
+ 
+             //const API_ENDPOINT = 'https://ibusinesscompanies.com:8443/mobile-ws';
+             var base = 'http://ibusinesscompanies.com:18080/mobile-ws/product/whatsap/produit?type=A LA UNE';
+             var query = req.body.Body;
+             
+             
+             request(base, async function (error, response, body) {
+                 body = await JSON.parse(JSON.stringify(body));
+                 // console.log(body);
+                 var jsonArray = await new chilkat.JsonArray();
+                 jsonArray.Load(body);
+                 var jsonObject = await new chilkat.JsonObject();
+                 jsonObject.Load(body); 
+                 i = 0;
+                 j = 0;
+                 var numPets = await jsonObject.SizeOfArray("product_list");
+                 var numPetAs = await jsonObject.SizeOfArray("product_list.media");
+                 console.log(numPets);
+                 console.log(req.body.Body);
+                 //twiml.message("Vous pouvez nous contacter au .\n 338273737 ou nous retrouver \n https://www.google.com/maps/place/Innov4africa/@14.7218749,-17.4634412,2728m/data=!3m1!1e3!4m5!3m4!1s0xec1730591a88de7:0x9a4d6bfb2eb7a58c!8m2!3d14.7166336!4d-17.4696404%22")
+                 //twiml.message("Merci de nous contacter sur whatsapp au https://wa.me/221777672020 pour plus d'infos"); 
+                
+                 while (i < 7) {
+                     jsonObject.I = await i;
+                     jsonObject.I = await j;
+                     console.log(i + ": " + jsonObject.StringOf("product_list[i].name")); 
+                     var msg =  twiml.message(jsonObject.StringOf("product_list[i].name")+"\n")
+                     msg.media(jsonObject.StringOf("product_list[i].media[j].url"));
+                     i = i+1;
+                     j = j+1;
+                 }
+                 var msge =  twiml.message(jsonObject.StringOf("product_list[3].name")+"\n")
+                 msge.media(jsonObject.StringOf("product_list[3].media[3].url"));
+                 //res.writeHead(200, {'Content-Type': 'text/xml'});
+                 //k = 137;
+                 
+                 //    const twimll = new MessagingResponse();
+                 // twiml.message("Vous pouvez nous contacter au .\n 338273737 ou nous retrouver \n https://www.google.com/maps/place/Innov4africa/@14.7218749,-17.4634412,2728m/data=!3m1!1e3!4m5!3m4!1s0xec1730591a88de7:0x9a4d6bfb2eb7a58c!8m2!3d14.7166336!4d-17.4696404%22")
+                // twiml.message("Merci de nous contacter sur whatsapp au https://wa.me/221777672020 pour plus d'infos"); 
+                 var k = twiml.toString();
+                 var resp = new MessagingResponse();
+                 //resp.message("Merci de nous contacter sur whatsapp au https://wa.me/221777672020 pour plus d'infos"); 
+                // resp.message("Merci de nous contacter sur whatsapp au https://wa.me/221777672020 pour plus d'infos").toString();
+                 
+                 //res.send(resp.toString());
+                 /*
+                 try {
+                     await premier()
+                   } catch (e) {
+                     next(e) // <- see no return
+                 }*/
+                 
+                     twiml.message("Vous pouvez nous contacter au .\n 338273737 ou nous retrouver \n https://www.google.com/maps/place/Innov4africa/@14.7218749,-17.4634412,2728m/data=!3m1!1e3!4m5!3m4!1s0xec1730591a88de7:0x9a4d6bfb2eb7a58c!8m2!3d14.7166336!4d-17.4696404%22")
+                     twiml.message("Merci de nous contacter sur whatsapp au https://wa.me/221777672020 pour plus d'infos"); 
+                     res.writeHead(200, {'Content-Type': 'text/xml'});
+                     res.end(twiml.toString());
+                 
+                 
+                 //https://server.ibusinesscompanies.com/i-images/Set_de_Th%C3%A9_8_Pi%C3%A8ces_/_1_Carafe_+_1_Plat_+_6_Tasses_/_Porcelaine_Blanc14242_800014241585847650502.jpg
+                 
+             });   
+             
+         }
+ 
+     else{
+         const twiml = new MessagingResponse();
+ 
+             //const API_ENDPOINT = 'https://ibusinesscompanies.com:8443/mobile-ws';
+             var base = 'http://ibusinesscompanies.com:18080/mobile-ws/product/whatsap/produit?type=A LA UNE';
+             var query = req.body.Body;
+             
+             
+             request(base, async function (error, response, body) {
+                 body = await JSON.parse(JSON.stringify(body));
+                 // console.log(body);
+                 var jsonArray = await new chilkat.JsonArray();
+                 jsonArray.Load(body);
+                 var jsonObject = await new chilkat.JsonObject();
+                 jsonObject.Load(body); 
+                 i = 0;
+                 j = 0;
+                 var numPets = await jsonObject.SizeOfArray("product_list");
+                 var numPetAs = await jsonObject.SizeOfArray("product_list.media");
+                 console.log(numPets);
+                 console.log(req.body.Body);
+                 //twiml.message("Vous pouvez nous contacter au .\n 338273737 ou nous retrouver \n https://www.google.com/maps/place/Innov4africa/@14.7218749,-17.4634412,2728m/data=!3m1!1e3!4m5!3m4!1s0xec1730591a88de7:0x9a4d6bfb2eb7a58c!8m2!3d14.7166336!4d-17.4696404%22")
+                 //twiml.message("Merci de nous contacter sur whatsapp au https://wa.me/221777672020 pour plus d'infos"); 
+                
+                 while (i < 7) {
+                     jsonObject.I = await i;
+                     jsonObject.I = await j;
+                     console.log(i + ": " + jsonObject.StringOf("product_list[i].name")); 
+                     var msg =  twiml.message(jsonObject.StringOf("product_list[i].name")+"\n")
+                     msg.media(jsonObject.StringOf("product_list[i].media[j].url"));
+                     i = i+1;
+                     j = j+1;
+                 }
+                 var msge =  twiml.message(jsonObject.StringOf("product_list[3].name")+"\n")
+                 msge.media(jsonObject.StringOf("product_list[3].media[3].url"));
+                 //res.writeHead(200, {'Content-Type': 'text/xml'});
+                 //k = 137;
+                 
+                 //    const twimll = new MessagingResponse();
+                 // twiml.message("Vous pouvez nous contacter au .\n 338273737 ou nous retrouver \n https://www.google.com/maps/place/Innov4africa/@14.7218749,-17.4634412,2728m/data=!3m1!1e3!4m5!3m4!1s0xec1730591a88de7:0x9a4d6bfb2eb7a58c!8m2!3d14.7166336!4d-17.4696404%22")
+                // twiml.message("Merci de nous contacter sur whatsapp au https://wa.me/221777672020 pour plus d'infos"); 
+                 var k = twiml.toString();
+                 var resp = new MessagingResponse();
+                 //resp.message("Merci de nous contacter sur whatsapp au https://wa.me/221777672020 pour plus d'infos"); 
+                // resp.message("Merci de nous contacter sur whatsapp au https://wa.me/221777672020 pour plus d'infos").toString();
+                 
+                 //res.send(resp.toString());
+                 /*
+                 try {
+                     await premier()
+                   } catch (e) {
+                     next(e) // <- see no return
+                 }*/
+                 
+                     twiml.message("Vous pouvez nous contacter au .\n 338273737 ou nous retrouver \n https://www.google.com/maps/place/Innov4africa/@14.7218749,-17.4634412,2728m/data=!3m1!1e3!4m5!3m4!1s0xec1730591a88de7:0x9a4d6bfb2eb7a58c!8m2!3d14.7166336!4d-17.4696404%22")
+                     twiml.message("Merci de nous contacter sur whatsapp au https://wa.me/221777672020 pour plus d'infos"); 
+                     res.writeHead(200, {'Content-Type': 'text/xml'});
+                     res.end(twiml.toString());
+                 
+                 
+                 //https://server.ibusinesscompanies.com/i-images/Set_de_Th%C3%A9_8_Pi%C3%A8ces_/_1_Carafe_+_1_Plat_+_6_Tasses_/_Porcelaine_Blanc14242_800014241585847650502.jpg
+                 
+             });     
+             
+     }
+ 
+    
+ } catch (error) {
+     console.log(error);
+   }
+ 
+   
+   
+ }));
+ 
 
-}));
-
-
-http.createServer(app).listen(3000, () => {
-    console.log('Express server listening on port 3000');
+http.createServer(app).listen(8080, () => {
+    console.log('Express server listening on port 8080');
 });
